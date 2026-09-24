@@ -2,7 +2,7 @@ NAME        = miniRT
 BONUS_NAME  = miniRT_bonus
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g -lm
 
 LIBFT_DIR   = libft
 LIBFT_LIB   = $(LIBFT_DIR)/libft.a
