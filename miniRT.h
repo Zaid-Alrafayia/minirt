@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:51:06 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/09/28 21:34:00 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,7 @@
 void	init_window(t_app *app);
 void	free_object(void *content);
 void	free_scene(t_scene *scene);
+int     check_fvalidity(char *file);
+int	    check_extension(char *file);
+
 #endif
