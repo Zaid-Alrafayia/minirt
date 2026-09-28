@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:51:06 by zaalrafa         ###   ########.fr       */
+/*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
+/*   Updated: 2026/09/28 16:18:19 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef MINIRT_H
-# define MINIRT_H
-# define WIDTH 960
-# define HEIGHT 540
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
 # include "42_libft/libft.h"
-# include "miniRT_structs.h"
+# include "miniRT_structs_bonus.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <float.h>
@@ -29,7 +26,4 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-void	init_window(t_app *app);
-void	free_object(void *content);
-void	free_scene(t_scene *scene);
 #endif
