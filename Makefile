@@ -18,7 +18,8 @@ LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
 
 SRC_DIR     = mandatory/
 #add here
-SRC         = $(SRC_DIR)main.c $(SRC_DIR)windows.c $(SRC_DIR)/utils/cleanup.c
+SRC         = $(SRC_DIR)main.c $(SRC_DIR)windows.c $(SRC_DIR)utils/cleanup.c $(SRC_DIR)parsing/file_validation.c \
+			$(SRC_DIR)parsing/init_elem.c $(SRC_DIR)parsing/init_objs.c $(SRC_DIR)parsing/read_file.c $(SRC_DIR)utils/parse_utils.c
 
 BONUS_DIR   = src_bonus
 #add bonus here

@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 21:34:00 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/09/29 19:43:40 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,19 @@
 void	init_window(t_app *app);
 void	free_object(void *content);
 void	free_scene(t_scene *scene);
-int     check_fvalidity(char *file);
-int	    check_extension(char *file);
+int		check_fvalidity(char *file);
+int		check_extension(char *file);
+void	free_split(char **parts);
+int		read_fscene(char *file, t_app *app);
+double	ft_atof(char *str);
+t_vec3	parse_vec3(char *str);
+t_color	parse_color(char *str);
+int		init_ambient(char **parts, t_app *app);
+int		init_camera(char **parts, t_app *app);
+int		init_light(char **parts, t_app *app);
+int		init_sphere(char **parts, t_app *app);
+int		init_plane(char **parts, t_app *app);
+int		init_cylinder(char **parts, t_app *app);
+int		is_valid_color(t_color c);
 
 #endif

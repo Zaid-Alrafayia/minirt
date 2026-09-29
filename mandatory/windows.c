@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   windows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:10:17 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:55:33 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/09/29 19:43:50 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../miniRT.h"
 
 int	close_program(void *param)
@@ -28,6 +29,7 @@ int	close_program(void *param)
 		free(app->mlx);
 	}
 	free_scene(&app->scene);
+	free(app);
 	exit(0);
 	return (0);
 }
