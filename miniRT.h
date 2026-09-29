@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/29 19:43:40 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/09/29 22:09:32 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int		init_sphere(char **parts, t_app *app);
 int		init_plane(char **parts, t_app *app);
 int		init_cylinder(char **parts, t_app *app);
 int		is_valid_color(t_color c);
+void	clean_gnl(int fd);
 
 #endif

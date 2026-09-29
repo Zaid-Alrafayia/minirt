@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 15:11:59 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/09/29 19:44:21 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/09/29 22:12:24 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	parse_line(char *line, t_app *app)
 	}
 	status = dispatch_id(parts, app);
 	if (!status)
-		ft_putstr_fd("Error\nunknown ID in scene file\n", 2);
+		ft_putstr_fd("Error\nunknown ID or invalid value in scene file\n", 2);
 	free_split(parts);
 	return (status);
 }
@@ -98,6 +98,7 @@ int	read_fscene(char *file, t_app *app)
 		if (!parse_line(line, app))
 		{
 			free(line);
+			clean_gnl(fd);
 			close(fd);
 			return (0);
 		}
