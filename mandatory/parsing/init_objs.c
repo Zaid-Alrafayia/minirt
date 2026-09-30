@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/09/29 19:48:29 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/01 02:21:34 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	init_plane(char **parts, t_app *app)
 		return (0);
 	}
 	pl->point = parse_vec3(parts[1]);
-	pl->normal = parse_vec3(parts[2]); //zaid: pl->normal = call ur func here instead (replace the assignment)
+	pl->normal = normvec(parse_vec3(parts[2]));
 	obj->type = OBJ_PLANE;
 	obj->color = color;
 	obj->data = pl;
@@ -85,7 +85,7 @@ int	init_cylinder(char **parts, t_app *app)
 		return (0);
 	}
 	cy->center = parse_vec3(parts[1]);
-	cy->axis = parse_vec3(parts[2]); //zaid: cy->axis = call ur func here instead (replace the assignment)
+	cy->axis = normvec(parse_vec3(parts[2]));
 	cy->diameter = ft_atof(parts[3]);
 	cy->height = ft_atof(parts[4]);
 	obj->type = OBJ_CYLINDER;

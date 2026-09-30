@@ -6,13 +6,13 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 14:52:10 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:07:12 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/01 02:13:17 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_STRUCTS_H
 # define MINIRT_STRUCTS_H
-
+# include "42_libft/libft.h"
 typedef struct s_vec3
 {
 	double		x;
