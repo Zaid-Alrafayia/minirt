@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 20:57:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/01 02:13:46 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/01 02:39:18 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ double	vecmag(const t_vec3 vec);
 t_vec3	vecadd(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vecsub(t_vec3 vec1, t_vec3 vec2);
 t_vec3	normvec(t_vec3 vec);
-t_vec3	dotprod(t_vec3 vec1, t_vec3 vec2);
+double	dotprod(t_vec3 vec1, t_vec3 vec2);
 
 #endif
