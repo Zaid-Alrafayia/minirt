@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dotprod.c                                          :+:      :+:    :+:   */
+/*   vecscale.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/01 01:45:52 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/03 21:34:46 by jalghamd         ###   ########.fr       */
+/*   Created: 2026/10/03 21:31:59 by jalghamd          #+#    #+#             */
+/*   Updated: 2026/10/03 21:33:33 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mathlib.h"
 
-double	dotprod(t_vec3 vec1, t_vec3 vec2)
+t_vec3	vecscale(t_vec3 vec, double scalar)
 {
-	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
+	t_vec3	res;
+
+	res.x = vec.x * scalar;
+	res.y = vec.y * scalar;
+	res.z = vec.z * scalar;
+	return (res);
 }

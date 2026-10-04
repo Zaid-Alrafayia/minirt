@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecsub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 01:43:02 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/01 01:44:22 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/03 21:34:37 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_vec3	vecsub(t_vec3 vec1, t_vec3 vec2)
 {
-	t_vec3 resvec;
+	t_vec3	resvec;
+
 	resvec.x = vec1.x - vec2.x;
 	resvec.y = vec1.y - vec2.y;
 	resvec.z = vec1.z - vec2.z;
