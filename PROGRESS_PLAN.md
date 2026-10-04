@@ -18,59 +18,67 @@ source lines. The central ray-tracing and rendering work is still remaining.
 
 ### Project setup
 
-- Makefile exists and builds `miniRT`.
-- `42_libft` is linked.
-- MiniLibX is linked.
-- Math and X11 libraries are linked.
-- Mandatory and bonus structure headers have been started.
+- [x] Makefile exists and builds `miniRT`.
+- [x] `42_libft` is linked.
+- [x] MiniLibX is linked.
+- [x] Math and X11 libraries are linked.
+- [x] Mandatory and bonus structure headers have been started.
 
 ### Program startup and validation
 
-- Checks the number of command-line arguments.
-- Checks that the scene filename ends in `.rt`.
-- Checks that the file exists and can be opened.
-- Rejects empty or unreadable files.
+- [x] Checks the number of command-line arguments.
+- [x] Checks that the scene filename ends in `.rt`.
+- [x] Checks that the file exists and can be opened.
+- [x] Rejects empty or unreadable files.
 
 ### Scene parsing
 
 The parser currently recognizes:
 
-- `A` ambient lighting
-- `C` camera
-- `L` light
-- `sp` sphere
-- `pl` plane
-- `cy` cylinder
+- [x] `A` ambient lighting
+- [x] `C` camera
+- [x] `L` light
+- [x] `sp` sphere
+- [x] `pl` plane
+- [x] `cy` cylinder
 
 It also has initial support for:
 
-- Parsing floating-point values.
-- Parsing vectors in `x,y,z` form.
-- Parsing colors in `R,G,B` form.
-- Allocating scene objects.
-- Cleaning object and light lists.
-- Cleaning remaining `get_next_line` data on an early parse failure.
+- [x] Parsing floating-point values.
+- [x] Parsing vectors in `x,y,z` form.
+- [x] Parsing colors in `R,G,B` form.
+- [x] Allocating scene objects.
+- [x] Cleaning object and light lists.
+- [x] Cleaning remaining `get_next_line` data on an early parse failure.
+
+The parser also currently includes checks for duplicate ambient and camera
+declarations, required token counts, missing ambient/camera/light elements,
+basic ambient/light ranges, and basic color ranges. These checks still need
+stricter numeric and format validation.
 
 ### Window and event handling
 
-- Initializes MiniLibX.
-- Creates a window and image buffer.
-- Displays the image buffer.
-- Handles the window close event.
-- Handles the Escape key.
-- Frees the scene and MiniLibX resources on exit.
+- [x] Initializes MiniLibX.
+- [x] Creates a window and image buffer.
+- [x] Displays the image buffer.
+- [x] Handles the window close event.
+- [x] Handles the Escape key.
+- [x] Frees the scene and MiniLibX resources on exit.
 
 ### Initial math helpers
 
 The `mathlib` directory contains early versions of:
 
-- Vector addition.
-- Vector subtraction.
-- Vector length.
-- A normalization/range helper.
-- A component-wise multiplication helper currently named `dotprod`.
+- [x] Vector addition.
+- [x] Vector subtraction.
+- [x] Vector magnitude.
+- [x] Vector normalization with a zero-vector guard.
+- [x] A scalar dot product helper named `dotprod`.
+- [x] A normalization/range helper.
 
-These helpers still need cleanup, testing, and integration with the renderer.
+The normalization helper is currently used when parsing camera, plane, and
+cylinder directions. These helpers still need focused tests, Norminette
+cleanup, and integration with the renderer.
 
 ## Known incomplete or incorrect areas
 
@@ -91,35 +99,37 @@ for:
 
 The parser still needs to validate:
 
-- Exactly one ambient-light declaration.
-- Exactly one camera declaration.
-- At least one light.
-- Required token counts for every identifier.
-- Unknown identifiers.
-- Malformed numeric values.
-- Extra characters after numeric values.
-- Vector component ranges and requirements.
-- Normalized camera, plane, and cylinder direction vectors.
-- Positive sphere diameter.
-- Positive cylinder diameter and height.
-- Color values as valid integer RGB values.
-- Duplicate or missing scene elements.
-- Allocation failures from list-node creation.
+- [x] Exactly one ambient-light declaration. Duplicate and missing declarations
+  are checked.
+- [x] Exactly one camera declaration. Duplicate and missing declarations are
+  checked.
+- [x] At least one light. The final light count is checked.
+- [x] Required token counts for every supported identifier.
+- [x] Unknown identifiers.
+- [ ] Malformed numeric values. Scalar fields and vector/color components are
+  format-checked, but invalid vector data can still become a zero vector.
+- [ ] Extra characters after numeric values. Most fields reject them through
+  `is_num()`/`is_int()`, but invalid vector data is not propagated as an error.
+- [ ] Vector component ranges and requirements.
+- [x] Positive sphere diameter.
+- [x] Positive cylinder diameter and height.
+- [x] Color values as valid integer RGB values. Integer syntax, component
+  count, range, and invalid-input rejection are checked.
+- [ ] Duplicate or missing scene elements. Ambient, camera, and light presence
+  is checked, but broader duplicate/missing validation is not complete.
+- [ ] Allocation failures from list-node creation.
 
 ### Math library needs correction
 
-- A mathematical dot product should return a `double`, not a `t_vec3`.
 - A cross-product helper is needed.
 - Scalar multiplication and vector scaling are needed.
-- Vector normalization is needed.
-- Zero-length vector handling must be explicit.
+- Zero-length vector handling needs dedicated tests.
 - Every helper should have focused tests.
 - Math source files currently need Norminette cleanup.
 
 ### Build and style issues
 
 - Norminette currently reports errors in several existing project files.
-- The Makefile contains an empty bonus source list.
 - The Makefile references `includes`, while the current headers are at the
   project root.
 - Object files and locally generated binaries should not be committed.
@@ -128,7 +138,7 @@ The parser still needs to validate:
 
 ## Remaining mandatory requirements
 
-1. Finish and test the vector/math library.
+1. Finish testing and clean up the vector/math library.
 2. Implement camera setup and ray generation.
 3. Implement sphere intersections.
 4. Implement plane intersections.
@@ -341,4 +351,3 @@ Norminette checks are stable.
 4. Add strict token-count and duplicate-element validation.
 5. Implement a camera ray for each pixel.
 6. Implement sphere intersection and render a single sphere.
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:30 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/09/29 19:43:59 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/05 02:30:27 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_vec3	parse_vec3(char *str)
 	vec.y = 0;
 	vec.z = 0;
 	parts = ft_split(str, ',');
-	if (!parts || !parts[0] || !parts[1] || !parts[2])
+	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3]
+		|| !is_num(parts[0]) || !is_num(parts[1]) || !is_num(parts[2]))
 	{
 		free_split(parts);
 		return (vec);
@@ -64,14 +65,15 @@ t_vec3	parse_vec3(char *str)
 
 t_color	parse_color(char *str)
 {
-	t_color		color;
-	char		**parts;
+	t_color	color;
+	char	**parts;
 
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	color.r = -1;
+	color.g = -1;
+	color.b = -1;
 	parts = ft_split(str, ',');
-	if (!parts || !parts[0] || !parts[1] || !parts[2])
+	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3]
+		|| !is_int(parts[0]) || !is_int(parts[1]) || !is_int(parts[2]))
 	{
 		free_split(parts);
 		return (color);

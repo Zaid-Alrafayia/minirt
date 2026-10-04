@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 15:11:59 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/09/29 22:12:24 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/04 00:56:15 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,30 @@ static int	parse_line(char *line, t_app *app)
 	status = dispatch_id(parts, app);
 	if (!status)
 		ft_putstr_fd("Error\nunknown ID or invalid value in scene file\n", 2);
+	else if (status == -1)
+		ft_putstr_fd("Error\nonly one ambient light is allowed\n", 2);
+	else if (status == -2)
+		ft_putstr_fd("Error\nonly one camera is allowed\n", 2);
+	else if (status == -3)
+		ft_putstr_fd("Error\ncomponant data incorrect\n", 2);
 	free_split(parts);
 	return (status);
+}
+
+int	check_lca(int fd, t_app *app, char *line)
+{
+	if (app->scene.lights_count < 1)
+		ft_putstr_fd("Error\nat least one light is needed\n", 2);
+	else if (!app->scene.has_amb)
+		ft_putstr_fd("Error\none ambient light is needed\n", 2);
+	else if (!app->scene.has_cam)
+		ft_putstr_fd("Error\none camera is needed\n", 2);
+	else
+		return (1);
+	free(line);
+	clean_gnl(fd);
+	close(fd);
+	return (0);
 }
 
 int	read_fscene(char *file, t_app *app)
@@ -95,7 +117,7 @@ int	read_fscene(char *file, t_app *app)
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		if (!parse_line(line, app))
+		if (parse_line(line, app) <= 0)
 		{
 			free(line);
 			clean_gnl(fd);
@@ -105,6 +127,8 @@ int	read_fscene(char *file, t_app *app)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!check_lca(fd, app, line))
+		return (0);
 	close(fd);
 	return (1);
 }

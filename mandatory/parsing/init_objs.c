@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/01 02:21:34 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/05 02:26:15 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	init_sphere(char **parts, t_app *app)
 	t_sphere	*sp;
 	t_color		color;
 
+	if (arrstr_len(parts) != 4)
+		return (-3);
 	color = parse_color(parts[3]);
-	if (!is_valid_color(color))
+	if (!is_valid_color(color) || !is_num(parts[2]) || ft_atof(parts[2]) <= 0)
 		return (0);
 	obj = malloc(sizeof(t_object));
 	if (!obj)
@@ -45,6 +47,8 @@ int	init_plane(char **parts, t_app *app)
 	t_plane		*pl;
 	t_color		color;
 
+	if (arrstr_len(parts) != 4)
+		return (-3);
 	color = parse_color(parts[3]);
 	if (!is_valid_color(color))
 		return (0);
@@ -72,8 +76,10 @@ int	init_cylinder(char **parts, t_app *app)
 	t_cylinder	*cy;
 	t_color		color;
 
+	if (arrstr_len(parts) != 6)
+		return (-3);
 	color = parse_color(parts[5]);
-	if (!is_valid_color(color))
+	if (!is_valid_color(color) || !is_num(parts[3]) || !is_num(parts[4]))
 		return (0);
 	obj = malloc(sizeof(t_object));
 	if (!obj)
@@ -88,6 +94,12 @@ int	init_cylinder(char **parts, t_app *app)
 	cy->axis = normvec(parse_vec3(parts[2]));
 	cy->diameter = ft_atof(parts[3]);
 	cy->height = ft_atof(parts[4]);
+	if (cy->diameter <= 0 || cy->height <= 0)
+	{
+		free(obj);
+		free(cy);
+		return (0);
+	}
 	obj->type = OBJ_CYLINDER;
 	obj->color = color;
 	obj->data = cy;

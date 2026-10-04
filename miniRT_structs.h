@@ -6,13 +6,15 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 14:52:10 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/01 02:13:17 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/03 00:12:19 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_STRUCTS_H
 # define MINIRT_STRUCTS_H
 # include "42_libft/libft.h"
+# include <stdbool.h>
+
 typedef struct s_vec3
 {
 	double		x;
@@ -110,8 +112,11 @@ typedef struct s_light
 typedef struct s_scene
 {
 	t_ambient	amb_light;
+	bool		has_amb;
 	t_camera	cam;
+	bool		has_cam;
 	t_list		*lights;
+	int			lights_count;
 	t_list		*objects;
 }				t_scene;
 
