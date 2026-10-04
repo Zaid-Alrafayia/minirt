@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_elem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:12:19 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/01 02:11:42 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/02 22:16:33 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	init_camera(char **parts, t_app *app)
 {
 	app->scene.cam.pos = parse_vec3(parts[1]);
 	app->scene.cam.dir = normvec(parse_vec3(parts[2]));
-		// zaid: app->scene.cam.dir = call ur func here instead (replace the assignment)
 	app->scene.cam.fov = ft_atof(parts[3]);
 	if (app->scene.cam.fov < 0.0 || app->scene.cam.fov > 180.0)
 		return (0);

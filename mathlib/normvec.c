@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normvec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 02:04:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/01 02:41:12 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/03 19:31:21 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 t_vec3	normvec(t_vec3 vec)
 {
-	t_vec3 res;
-	double magnitude = vecmag(vec);
+	t_vec3	res;
+	double	magnitude;
+
+	magnitude = vecmag(vec);
 	if (magnitude == 0)
 		return (vec);
 	res.x = vec.x / magnitude;
