@@ -38,7 +38,7 @@ int		check_extension(char *file);
 void	free_split(char **parts);
 int		read_fscene(char *file, t_app *app);
 double	ft_atof(char *str);
-t_vec3	parse_vec3(char *str);
+int		parse_vec3(char *str, t_vec3 *vec);
 t_color	parse_color(char *str);
 int		init_ambient(char **parts, t_app *app);
 int		init_camera(char **parts, t_app *app);

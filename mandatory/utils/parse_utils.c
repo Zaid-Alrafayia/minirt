@@ -41,26 +41,26 @@ double	ft_atof(char *str)
 	return ((sign * res) / div);
 }
 
-t_vec3	parse_vec3(char *str)
+int	parse_vec3(char *str, t_vec3 *vec)
 {
-	t_vec3	vec;
 	char	**parts;
 
-	vec.x = 0;
-	vec.y = 0;
-	vec.z = 0;
+	if (!str)
+		return (1);
 	parts = ft_split(str, ',');
-	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3]
-		|| !is_num(parts[0]) || !is_num(parts[1]) || !is_num(parts[2]))
+	if (!parts)
+		return (1);
+	if (!parts[0] || !parts[1] || !parts[2] || parts[3] || !is_num(parts[0])
+		|| !is_num(parts[1]) || !is_num(parts[2]))
 	{
 		free_split(parts);
-		return (vec);
+		return (1);
 	}
-	vec.x = ft_atof(parts[0]);
-	vec.y = ft_atof(parts[1]);
-	vec.z = ft_atof(parts[2]);
+	vec->x = ft_atof(parts[0]);
+	vec->y = ft_atof(parts[1]);
+	vec->z = ft_atof(parts[2]);
 	free_split(parts);
-	return (vec);
+	return (0);
 }
 
 t_color	parse_color(char *str)

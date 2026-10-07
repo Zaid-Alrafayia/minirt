@@ -13,11 +13,11 @@
 #include "mathlib.h"
 #include <stdio.h>
 
-double	norm(double value, double max, double min, double a, double b)
+double	norm(double value, double max, double a, double b)
 {
-	if (max - min == 0)
+	if (max == 0)
 		return (0.0);
-	return ((value - min) * (a - b)) / (max - min);
+	return (value * (a - b) / max);
 }
 // int	main(void)
 // {

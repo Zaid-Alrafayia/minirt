@@ -16,7 +16,7 @@
 # include "../miniRT_structs.h"
 # include <math.h>
 
-double	norm(double value, double max, double min, double a, double b);
+double	norm(double value, double max, double a, double b);
 double	vecmag(const t_vec3 vec);
 t_vec3	vecadd(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vecsub(t_vec3 vec1, t_vec3 vec2);

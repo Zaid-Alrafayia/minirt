@@ -27,12 +27,11 @@ int	init_sphere(char **parts, t_app *app)
 	if (!obj)
 		return (0);
 	sp = malloc(sizeof(t_sphere));
-	if (!sp)
+	if (!sp || parse_vec3(parts[1], &sp->center))
 	{
 		free(obj);
 		return (0);
 	}
-	sp->center = parse_vec3(parts[1]);
 	sp->diameter = ft_atof(parts[2]);
 	obj->type = OBJ_SPHERE;
 	obj->color = color;
@@ -56,13 +55,13 @@ int	init_plane(char **parts, t_app *app)
 	if (!obj)
 		return (0);
 	pl = malloc(sizeof(t_plane));
-	if (!pl)
+	if (!pl || parse_vec3(parts[1], &pl->point) || parse_vec3(parts[2],
+			&pl->normal))
 	{
 		free(obj);
 		return (0);
 	}
-	pl->point = parse_vec3(parts[1]);
-	pl->normal = normvec(parse_vec3(parts[2]));
+	pl->normal = normvec(pl->normal);
 	obj->type = OBJ_PLANE;
 	obj->color = color;
 	obj->data = pl;
@@ -85,13 +84,12 @@ int	init_cylinder(char **parts, t_app *app)
 	if (!obj)
 		return (0);
 	cy = malloc(sizeof(t_cylinder));
-	if (!cy)
+	if (!cy || parse_vec3(parts[1], &cy->center) || parse_vec3(parts[2],
+			&cy->axis))
 	{
 		free(obj);
 		return (0);
 	}
-	cy->center = parse_vec3(parts[1]);
-	cy->axis = normvec(parse_vec3(parts[2]));
 	cy->diameter = ft_atof(parts[3]);
 	cy->height = ft_atof(parts[4]);
 	if (cy->diameter <= 0 || cy->height <= 0)
@@ -100,6 +98,7 @@ int	init_cylinder(char **parts, t_app *app)
 		free(cy);
 		return (0);
 	}
+	cy->axis = normvec(cy->axis);
 	obj->type = OBJ_CYLINDER;
 	obj->color = color;
 	obj->data = cy;

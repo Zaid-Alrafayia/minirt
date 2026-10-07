@@ -32,12 +32,12 @@ int	init_ambient(char **parts, t_app *app)
 
 int	init_camera(char **parts, t_app *app)
 {
-	if (arrstr_len(parts) != 4)
-		return (-3);
 	if (app->scene.has_cam)
 		return (-2);
-	app->scene.cam.pos = parse_vec3(parts[1]);
-	app->scene.cam.dir = normvec(parse_vec3(parts[2]));
+	if (arrstr_len(parts) != 4 || parse_vec3(parts[1], &app->scene.cam.pos)
+		|| parse_vec3(parts[2], &app->scene.cam.dir))
+		return (-3);
+	app->scene.cam.dir = normvec(app->scene.cam.dir);
 	if (!is_num(parts[3]))
 		return (0);
 	app->scene.cam.fov = ft_atof(parts[3]);
@@ -66,7 +66,8 @@ int	init_light(char **parts, t_app *app)
 	light = malloc(sizeof(t_light));
 	if (!light)
 		return (0);
-	light->pos = parse_vec3(parts[1]);
+	if (parse_vec3(parts[1], &light->pos))
+		return (-3);
 	light->brightness = brightness;
 	light->color = color;
 	ft_lstadd_back(&app->scene.lights, ft_lstnew(light));

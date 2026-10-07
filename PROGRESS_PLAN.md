@@ -106,9 +106,9 @@ The parser still needs to validate:
 - [x] At least one light. The final light count is checked.
 - [x] Required token counts for every supported identifier.
 - [x] Unknown identifiers.
-- [ ] Malformed numeric values. Scalar fields and vector/color components are
+- [x] Malformed numeric values. Scalar fields and vector/color components are
   format-checked, but invalid vector data can still become a zero vector.
-- [ ] Extra characters after numeric values. Most fields reject them through
+- [x] Extra characters after numeric values. Most fields reject them through
   `is_num()`/`is_int()`, but invalid vector data is not propagated as an error.
 - [ ] Vector component ranges and requirements.
 - [x] Positive sphere diameter.
