@@ -6,12 +6,13 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 20:57:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/07 10:59:01 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/07 19:03:14 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATHLIB_H
 # define MATHLIB_H
+# define EPSILON 0.0001
 
 # include "../miniRT_structs.h"
 # include <math.h>
