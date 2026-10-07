@@ -76,7 +76,7 @@ object payloads after the other person has started depending on them.
 
 # Person A: Math, Camera, and Rendering Pipeline
 
-## A1. Stabilize the vector API
+## [x] A1. Stabilize the vector API (DONE)
 
 **Goal:** provide reliable operations for every later renderer and geometry
 calculation.
@@ -114,7 +114,7 @@ calculation.
 - Focused checks demonstrate expected results within a small floating-point
   tolerance.
 
-## A2. Define camera basis vectors
+## [x] A2. Define camera basis vectors (DONE)
 
 **Goal:** convert the parsed camera position, direction, and field of view into
 an orthonormal basis for ray generation.
@@ -141,7 +141,7 @@ an orthonormal basis for ray generation.
 - Changing the camera direction rotates the image in the expected direction.
 - The camera setup has no hidden dependency on object or light data.
 
-## A3. Generate one ray per pixel
+## [x] A3. Generate one ray per pixel (DONE)
 
 **Goal:** generate a primary ray through the center of every output pixel.
 
@@ -165,7 +165,7 @@ an orthonormal basis for ray generation.
 - Moving the camera changes the view without changing object data.
 - Reversing the camera direction makes the object disappear behind the camera.
 
-## A4. Build the render loop
+## [x] A4. Build the render loop (DONE)
 
 **Goal:** connect camera rays to scene tracing and image writes.
 
@@ -216,7 +216,7 @@ specific object formula.
   is encountered first in the linked list.
 - A ray tangent to an object behaves consistently at the epsilon boundary.
 
-## A6. Implement image and color conversion
+## [x] A6. Implement image and color conversion (DONE)
 
 **Goal:** safely write calculated colors into the MiniLibX image buffer.
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   windows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:10:17 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/08 03:40:34 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/08 01:46:02 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void	init_window(t_app *app)
 	}
 	app->win = mlx_new_window(app->mlx, WIDTH, HEIGHT, "miniRT");
 	if (!app->win)
-		return (close_program(app), 0);
+		close_program(app);
 	app->img.img_ptr = mlx_new_image(app->mlx, WIDTH, HEIGHT);
 	if (!app->img.img_ptr)
-		return (close_program(app), 0);
+		close_program(app);
 	app->img.addr = mlx_get_data_addr(app->img.img_ptr, &app->img.bpp,
 			&app->img.line_len, &app->img.endian);
 	if (!app->img.addr)
-		return (close_program(app), 0);
-	mlx_put_image_to_window(app->mlx, app->win, app->img.img_ptr, 0, 0);
+		close_program(app);
 	mlx_hook(app->win, 17, 0, close_program, app);
 	mlx_hook(app->win, 2, 1L << 0, key_handler, app);
+	render_scene(app);
 	mlx_loop(app->mlx);
 }

@@ -78,6 +78,14 @@ The `mathlib` directory contains early versions of:
 - [x] A scalar dot product helper named `dotprod`.
 - [x] A normalization/range helper.
 
+### Camera and ray generation
+
+- [x] Camera basis vectors setup (`forward`, `right`, `up`).
+- [x] World-up selection and vertical camera edge-case handling.
+- [x] Horizontal FOV conversion to radians and viewport scaling.
+- [x] Primary ray generation per pixel through center (`+ 0.5`).
+- [x] Ray direction normalization.
+
 The normalization helper is currently used when parsing camera, plane, and
 cylinder directions. These helpers still need focused tests and integration
 with the renderer.
@@ -86,16 +94,15 @@ with the renderer.
 
 ### Rendering is not implemented
 
-The current window displays an unrendered image. There is no implementation
-for:
+There is no implementation for:
 
-- Camera ray generation.
+- [x] Camera ray generation.
 - Ray/object intersections.
 - Selecting the nearest visible object.
 - Computing surface normals.
 - Lighting.
 - Shadows.
-- Writing calculated colors into the image buffer.
+- [x] Writing calculated colors into the image buffer.
 
 ### Parsing validation is incomplete
 
@@ -138,7 +145,7 @@ The parser still needs to validate:
 ## Remaining mandatory requirements
 
 1. Add focused tests and finish cleaning up the vector/math library.
-2. Implement camera setup and ray generation.
+[x] 2. Implement camera setup and ray generation.
 3. Implement sphere intersections.
 4. Implement plane intersections.
 5. Implement finite-cylinder intersections, including caps if required by the
@@ -147,8 +154,8 @@ The parser still needs to validate:
 7. Compute normals for every supported object.
 8. Implement ambient and diffuse lighting.
 9. Implement hard shadows.
-10. Convert colors to the MiniLibX pixel format.
-11. Render every pixel into the image buffer.
+[x] 10. Convert colors to the MiniLibX pixel format.
+[x] 11. Render every pixel into the image buffer.
 12. Complete scene-file validation.
 13. Add robust cleanup for every error path.
 14. Add test scenes for valid and invalid input.

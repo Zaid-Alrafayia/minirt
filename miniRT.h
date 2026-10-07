@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/07 19:03:35 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/08 01:47:39 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define MINIRT_H
 # define WIDTH 960
 # define HEIGHT 540
+
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
 
 # include "42_libft/libft.h"
 # include "mathlib/mathlib.h"
@@ -49,5 +53,10 @@ int		init_cylinder(char **parts, t_app *app);
 int		is_valid_color(t_color c);
 void	clean_gnl(int fd);
 int		check_lca(int fd, t_app *app, char *line);
+void	camera_basis(t_camera *cam);
+t_ray	camera_ray(t_camera *cam, double x, double y);
+int		pack_color(t_color color);
+void	put_pixel(t_img *img, int x, int y, int color);
+void	render_scene(t_app *app);
 
 #endif

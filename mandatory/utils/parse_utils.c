@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:30 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/05 02:30:27 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/08 01:17:12 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ t_color	parse_color(char *str)
 	t_color	color;
 	char	**parts;
 
-	color.r = -1;
-	color.g = -1;
-	color.b = -1;
+	color.r = -1.0;
+	color.g = -1.0;
+	color.b = -1.0;
 	parts = ft_split(str, ',');
 	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3]
 		|| !is_int(parts[0]) || !is_int(parts[1]) || !is_int(parts[2]))
@@ -93,16 +93,17 @@ t_color	parse_color(char *str)
 		free_split(parts);
 		return (color);
 	}
-	color.r = ft_atof(parts[0]);
-	color.g = ft_atof(parts[1]);
-	color.b = ft_atof(parts[2]);
+	color.r = ft_atof(parts[0]) / 255.0;
+	color.g = ft_atof(parts[1]) / 255.0;
+	color.b = ft_atof(parts[2]) / 255.0;
 	free_split(parts);
 	return (color);
 }
 
 int	is_valid_color(t_color c)
 {
-	if (c.r < 0 || c.r > 255 || c.g < 0 || c.g > 255 || c.b < 0 || c.b > 255)
+	if (c.r < 0.0 || c.r > 1.0 || c.g < 0.0 || c.g > 1.0 || c.b < 0.0
+		|| c.b > 1.0)
 		return (0);
 	return (1);
 }
