@@ -115,9 +115,7 @@ The parser still needs to validate:
 - [x] Positive cylinder diameter and height.
 - [x] Color values as valid integer RGB values. Integer syntax, component
   count, range, and invalid-input rejection are checked.
-- [ ] Duplicate or missing scene elements. Ambient, camera, and light presence
-  is checked, but broader duplicate/missing validation is not complete.
-- [ ] Allocation failures from list-node creation.
+- [x] Allocation failures from list-node creation.
 
 ### Math library needs correction
 

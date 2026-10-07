@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:12:19 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/05 02:41:34 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/07 11:37:04 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	init_camera(char **parts, t_app *app)
 	if (app->scene.has_cam)
 		return (-2);
 	if (arrstr_len(parts) != 4 || parse_vec3(parts[1], &app->scene.cam.pos)
-		|| parse_vec3(parts[2], &app->scene.cam.dir))
+		|| parse_vec3(parts[2], &app->scene.cam.dir)
+		|| is_zero_vec(app->scene.cam.dir))
 		return (-3);
 	app->scene.cam.dir = normvec(app->scene.cam.dir);
 	if (!is_num(parts[3]))
@@ -52,16 +53,14 @@ int	init_light(char **parts, t_app *app)
 	t_light	*light;
 	double	brightness;
 	t_color	color;
+	t_list	*node;
 
 	if (arrstr_len(parts) != 4)
 		return (-3);
-	if (!is_num(parts[2]))
-		return (0);
 	brightness = ft_atof(parts[2]);
-	if (brightness < 0.0 || brightness > 1.0)
-		return (0);
 	color = parse_color(parts[3]);
-	if (!is_valid_color(color))
+	if (!is_valid_color(color) || brightness < 0.0 || brightness > 1.0
+		|| !is_num(parts[2]))
 		return (0);
 	light = malloc(sizeof(t_light));
 	if (!light)
@@ -70,7 +69,13 @@ int	init_light(char **parts, t_app *app)
 		return (-3);
 	light->brightness = brightness;
 	light->color = color;
-	ft_lstadd_back(&app->scene.lights, ft_lstnew(light));
+	node = ft_lstnew(light);
+	if (!node)
+	{
+		free(light);
+		return (0);
+	}
+	ft_lstadd_back(&app->scene.lights, node);
 	app->scene.lights_count++;
 	return (1);
 }
