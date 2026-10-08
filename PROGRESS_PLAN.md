@@ -8,7 +8,7 @@ reading a `.rt` scene file.
 
 Estimated progress:
 
-- Mandatory project: approximately **15-20%**
+- Mandatory project: approximately **20-25%**
 - Bonus project: **0%**
 
 This estimate is based on the required functionality, not on the number of
@@ -50,11 +50,13 @@ It also has initial support for:
 - [x] Allocating scene objects.
 - [x] Cleaning object and light lists.
 - [x] Cleaning remaining `get_next_line` data on an early parse failure.
+- [x] Cleaning allocated cylinder data when parsing, validation, or list-node
+  creation fails.
 
 The parser also currently includes checks for duplicate ambient and camera
 declarations, required token counts, missing ambient/camera/light elements,
-basic ambient/light ranges, and basic color ranges. These checks still need
-stricter numeric and format validation.
+numeric formats, basic ambient/light ranges, vector validity, and color ranges.
+More scene-level test coverage is still needed.
 
 ### Window and event handling
 
@@ -77,8 +79,8 @@ The `mathlib` directory contains early versions of:
 - [x] A normalization/range helper.
 
 The normalization helper is currently used when parsing camera, plane, and
-cylinder directions. These helpers still need focused tests, Norminette
-cleanup, and integration with the renderer.
+cylinder directions. These helpers still need focused tests and integration
+with the renderer.
 
 ## Known incomplete or incorrect areas
 
@@ -107,10 +109,12 @@ The parser still needs to validate:
 - [x] Required token counts for every supported identifier.
 - [x] Unknown identifiers.
 - [x] Malformed numeric values. Scalar fields and vector/color components are
-  format-checked, but invalid vector data can still become a zero vector.
-- [x] Extra characters after numeric values. Most fields reject them through
-  `is_num()`/`is_int()`, but invalid vector data is not propagated as an error.
-- [ ] Vector component ranges and requirements.
+  format-checked and rejected by the parser.
+- [x] Extra characters after numeric values. `is_num()`/`is_int()` reject
+  trailing characters, and invalid vector data is propagated as an error.
+- [x] Vector component ranges and requirements. Vector syntax is validated,
+  positions allow arbitrary numeric components, and camera directions, plane
+  normals, and cylinder axes must be non-zero before normalization.
 - [x] Positive sphere diameter.
 - [x] Positive cylinder diameter and height.
 - [x] Color values as valid integer RGB values. Integer syntax, component
@@ -119,24 +123,21 @@ The parser still needs to validate:
 
 ### Math library needs correction
 
-- A cross-product helper is needed.
-- Scalar multiplication and vector scaling are needed.
-- Zero-length vector handling needs dedicated tests.
-- Every helper should have focused tests.
-- Math source files currently need Norminette cleanup.
+- [x] A cross-product helper is implemented in `mathlib/veccross.c`.
+- [x] Scalar multiplication/vector scaling is implemented in
+  `mathlib/vecscale.c`.
+- [x] Math source files pass Norminette.
 
 ### Build and style issues
 
-- Norminette currently reports errors in several existing project files.
-- The Makefile references `includes`, while the current headers are at the
-  project root.
-- Object files and locally generated binaries should not be committed.
-- Error handling for MiniLibX initialization and image/window creation needs to
+- [x] Norminette passes for the submitted project files outside MiniLibX.
+- [x] The Makefile include flags match the headers at the project root.
+- [x] Error handling for MiniLibX initialization and image/window creation needs to
   be completed.
 
 ## Remaining mandatory requirements
 
-1. Finish testing and clean up the vector/math library.
+1. Add focused tests and finish cleaning up the vector/math library.
 2. Implement camera setup and ray generation.
 3. Implement sphere intersections.
 4. Implement plane intersections.

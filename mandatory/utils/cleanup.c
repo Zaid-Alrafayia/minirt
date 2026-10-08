@@ -45,3 +45,19 @@ void	clean_gnl(int fd)
 		line = get_next_line(fd);
 	}
 }
+
+int	check_lca(int fd, t_app *app, char *line)
+{
+	if (app->scene.lights_count < 1)
+		ft_putstr_fd("Error\nat least one light is needed\n", 2);
+	else if (!app->scene.has_amb)
+		ft_putstr_fd("Error\none ambient light is needed\n", 2);
+	else if (!app->scene.has_cam)
+		ft_putstr_fd("Error\none camera is needed\n", 2);
+	else
+		return (1);
+	free(line);
+	clean_gnl(fd);
+	close(fd);
+	return (0);
+}

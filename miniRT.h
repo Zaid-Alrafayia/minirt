@@ -48,5 +48,6 @@ int		init_plane(char **parts, t_app *app);
 int		init_cylinder(char **parts, t_app *app);
 int		is_valid_color(t_color c);
 void	clean_gnl(int fd);
+int		check_lca(int fd, t_app *app, char *line);
 
 #endif

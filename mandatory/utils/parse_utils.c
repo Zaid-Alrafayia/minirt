@@ -12,6 +12,21 @@
 
 #include "../../miniRT.h"
 
+void	free_split(char **parts)
+{
+	int	i;
+
+	if (!parts)
+		return ;
+	i = 0;
+	while (parts[i])
+	{
+		free(parts[i]);
+		i++;
+	}
+	free(parts);
+}
+
 double	ft_atof(char *str)
 {
 	double	res;

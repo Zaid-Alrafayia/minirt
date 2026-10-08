@@ -48,27 +48,25 @@ int	init_camera(char **parts, t_app *app)
 	return (1);
 }
 
-int	init_light(char **parts, t_app *app)
+static int	init_light_data(char **parts, t_light **light)
 {
-	t_light	*light;
-	double	brightness;
-	t_color	color;
+	*light = malloc(sizeof(t_light));
+	if (!*light)
+		return (0);
+	if (parse_vec3(parts[1], &(*light)->pos))
+	{
+		free(*light);
+		return (-3);
+	}
+	(*light)->brightness = ft_atof(parts[2]);
+	(*light)->color = parse_color(parts[3]);
+	return (1);
+}
+
+static int	add_light(t_light *light, t_app *app)
+{
 	t_list	*node;
 
-	if (arrstr_len(parts) != 4)
-		return (-3);
-	brightness = ft_atof(parts[2]);
-	color = parse_color(parts[3]);
-	if (!is_valid_color(color) || brightness < 0.0 || brightness > 1.0
-		|| !is_num(parts[2]))
-		return (0);
-	light = malloc(sizeof(t_light));
-	if (!light)
-		return (0);
-	if (parse_vec3(parts[1], &light->pos))
-		return (-3);
-	light->brightness = brightness;
-	light->color = color;
 	node = ft_lstnew(light);
 	if (!node)
 	{
@@ -78,4 +76,24 @@ int	init_light(char **parts, t_app *app)
 	ft_lstadd_back(&app->scene.lights, node);
 	app->scene.lights_count++;
 	return (1);
+}
+
+int	init_light(char **parts, t_app *app)
+{
+	t_light	*light;
+	double	brightness;
+	t_color	color;
+	int		status;
+
+	if (arrstr_len(parts) != 4)
+		return (-3);
+	brightness = ft_atof(parts[2]);
+	color = parse_color(parts[3]);
+	if (!is_valid_color(color) || brightness < 0.0 || brightness > 1.0
+		|| !is_num(parts[2]))
+		return (0);
+	status = init_light_data(parts, &light);
+	if (status != 1)
+		return (status);
+	return (add_light(light, app));
 }

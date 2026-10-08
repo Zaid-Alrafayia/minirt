@@ -26,21 +26,6 @@ static void	rm_whitespaces(char *line)
 	}
 }
 
-void	free_split(char **parts)
-{
-	int	i;
-
-	if (!parts)
-		return ;
-	i = 0;
-	while (parts[i])
-	{
-		free(parts[i]);
-		i++;
-	}
-	free(parts);
-}
-
 static int	dispatch_id(char **parts, t_app *app)
 {
 	int	status;
@@ -86,31 +71,11 @@ static int	parse_line(char *line, t_app *app)
 	return (status);
 }
 
-int	check_lca(int fd, t_app *app, char *line)
+static int	read_lines(int fd, t_app *app)
 {
-	if (app->scene.lights_count < 1)
-		ft_putstr_fd("Error\nat least one light is needed\n", 2);
-	else if (!app->scene.has_amb)
-		ft_putstr_fd("Error\none ambient light is needed\n", 2);
-	else if (!app->scene.has_cam)
-		ft_putstr_fd("Error\none camera is needed\n", 2);
-	else
-		return (1);
-	free(line);
-	clean_gnl(fd);
-	close(fd);
-	return (0);
-}
-
-int	read_fscene(char *file, t_app *app)
-{
-	int		fd;
 	char	*line;
 	int		len;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (0);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -127,7 +92,24 @@ int	read_fscene(char *file, t_app *app)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!check_lca(fd, app, line))
+	free(line);
+	return (1);
+}
+
+int	read_fscene(char *file, t_app *app)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	if (!read_lines(fd, app))
+	{
+		clean_gnl(fd);
+		close(fd);
+		return (0);
+	}
+	if (!check_lca(fd, app, NULL))
 		return (0);
 	close(fd);
 	return (1);

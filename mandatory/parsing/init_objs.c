@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/07 11:45:18 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/08 03:17:28 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,41 +69,59 @@ int	init_plane(char **parts, t_app *app)
 	return (1);
 }
 
-int	init_cylinder(char **parts, t_app *app)
+static int	init_cylinder_data(char **parts, t_cylinder **cy)
 {
-	t_object	*obj;
-	t_cylinder	*cy;
-	t_color		color;
-	t_list		*node;
-
-	if (arrstr_len(parts) != 6)
-		return (-3);
-	color = parse_color(parts[5]);
-	if (!is_valid_color(color) || !is_num(parts[3]) || !is_num(parts[4]))
+	*cy = malloc(sizeof(t_cylinder));
+	if (!*cy)
 		return (0);
-	obj = malloc(sizeof(t_object));
-	if (!obj)
-		return (0);
-	cy = malloc(sizeof(t_cylinder));
-	if (!cy || parse_vec3(parts[1], &cy->center) || parse_vec3(parts[2],
-			&cy->axis) || is_zero_vec(cy->axis))
+	if (parse_vec3(parts[1], &(*cy)->center)
+		|| parse_vec3(parts[2], &(*cy)->axis)
+		|| is_zero_vec((*cy)->axis))
 	{
-		free(obj);
+		free(*cy);
 		return (0);
 	}
-	cy->diameter = ft_atof(parts[3]);
-	cy->height = ft_atof(parts[4]);
-	cy->axis = normvec(cy->axis);
+	(*cy)->diameter = ft_atof(parts[3]);
+	(*cy)->height = ft_atof(parts[4]);
+	(*cy)->axis = normvec((*cy)->axis);
+	if ((*cy)->diameter <= 0 || (*cy)->height <= 0)
+	{
+		free(*cy);
+		return (0);
+	}
+	return (1);
+}
+
+static int	add_cylinder(t_cylinder *cy, t_color color, t_app *app)
+{
+	t_object	*obj;
+	t_list		*node;
+
+	obj = malloc(sizeof(t_object));
+	if (!obj)
+		return (free(cy), 0);
 	obj->type = OBJ_CYLINDER;
 	obj->color = color;
 	obj->data = cy;
 	node = ft_lstnew(obj);
-	if (cy->diameter <= 0 || cy->height <= 0 || !node)
-	{
-		free(obj);
-		free(cy);
-		return (0);
-	}
+	if (!node)
+		return (free(cy), free(obj), 0);
 	ft_lstadd_back(&app->scene.objects, node);
 	return (1);
+}
+
+int	init_cylinder(char **parts, t_app *app)
+{
+	t_cylinder	*cy;
+	t_color		color;
+
+	if (arrstr_len(parts) != 6)
+		return (-3);
+	color = parse_color(parts[5]);
+	if (!is_valid_color(color) || !is_num(parts[3])
+		|| !is_num(parts[4]))
+		return (0);
+	if (!init_cylinder_data(parts, &cy))
+		return (0);
+	return (add_cylinder(cy, color, app));
 }

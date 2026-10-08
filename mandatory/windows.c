@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   windows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:10:17 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/30 21:03:02 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/08 03:40:34 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,23 @@ int	key_handler(int keycode, void *param)
 void	init_window(t_app *app)
 {
 	app->mlx = mlx_init();
-	//	if (!app->mlx)
-	//		clean_exit(app, "MLX initialization failed");
+	if (!app->mlx)
+	{
+		free_scene(&app->scene);
+		free(app);
+		perror("Error: Failed to initialize MiniLibX.");
+		exit(1);
+	}
 	app->win = mlx_new_window(app->mlx, WIDTH, HEIGHT, "miniRT");
-	//	if (!app->win)
-	//		clean_exit(app, "Failed to create window");
+	if (!app->win)
+		return (close_program(app), 0);
 	app->img.img_ptr = mlx_new_image(app->mlx, WIDTH, HEIGHT);
-	//	if (!app->img.img_ptr)
-	//		clean_exit(app, "Failed to create image buffer");
+	if (!app->img.img_ptr)
+		return (close_program(app), 0);
 	app->img.addr = mlx_get_data_addr(app->img.img_ptr, &app->img.bpp,
 			&app->img.line_len, &app->img.endian);
-	//	if (!app->img.addr)
-	//		clean_exit(app, "Failed to retrieve image data address");
-	/*render_scene(app); here we put the render function*/
+	if (!app->img.addr)
+		return (close_program(app), 0);
 	mlx_put_image_to_window(app->mlx, app->win, app->img.img_ptr, 0, 0);
 	mlx_hook(app->win, 17, 0, close_program, app);
 	mlx_hook(app->win, 2, 1L << 0, key_handler, app);
