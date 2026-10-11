@@ -6,24 +6,71 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 00:19:49 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/08 01:47:48 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/11 22:15:00 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../miniRT.h"
 
-//delete this func after finishing the trace_ray (using it only for testing)
-static t_color	test_color(t_ray ray)
+//removed test_color so window is expected to be black until intersections work
+static int	intersect_obj(t_ray ray, t_object *obj, t_hit *hit)
 {
-	t_color	color;
+	int	is_hit;
 
-	color.r = (ray.dir.x + 1.0) * 0.5;
-	color.g = (ray.dir.y + 1.0) * 0.5;
-	color.b = (ray.dir.z + 1.0) * 0.5;
-	return (color);
+	(void)ray; //remove it after calling intersection functions
+	is_hit = 0;
+	if (!obj || !obj->data)
+		return (0);
+	if (obj->type == OBJ_SPHERE)
+		is_hit = 0;//replace with is_hit = intersect_sphere(...)
+	else if (obj->type == OBJ_PLANE)
+		is_hit = 0; //replace with is_hit = intersect_plane(...)
+	else if (obj->type == OBJ_CYLINDER)
+		is_hit = 0; //replace with is_hit = intersect_cylinder(...)
+	if (is_hit)
+	{
+		hit->color = obj->color;
+		hit->obj = obj;
+	}
+	return (is_hit);
 }
 
-//after finishing trace_ray call it here instead -> pack_color(tarce_ray(ray))
+int	find_closest_hit(t_ray ray, t_scene *scene, t_hit *hit)
+{
+	t_list	*curr;
+	t_hit	tmp_hit;
+	int		hit_found;
+
+	hit_found = 0;
+	hit->t = DBL_MAX;
+	curr = scene->objects;
+	while (curr)
+	{
+		if (intersect_obj(ray, (t_object *)curr->content, &tmp_hit))
+		{
+			if (tmp_hit.t > EPSILON && tmp_hit.t < hit->t)
+			{
+				*hit = tmp_hit;
+				hit_found = 1;
+			}
+		}
+		curr = curr->next;
+	}
+	return (hit_found);
+}
+
+t_color	trace_ray(t_ray ray, t_scene *scene)
+{
+	t_hit	hit;
+
+	if (find_closest_hit(ray, scene, &hit))
+	{
+		//return lighting func here instead
+		return (hit.color);
+	}
+	return ((t_color){0.0, 0.0, 0.0});
+}
+
 void	render_scene(t_app *app)
 {
 	int		x;
@@ -39,7 +86,7 @@ void	render_scene(t_app *app)
 		while (x < WIDTH)
 		{
 			ray = camera_ray(&app->scene.cam, (double)x, (double)y);
-			color = pack_color(test_color(ray));
+			color = pack_color(trace_ray(ray, &app->scene));
 			put_pixel(&app->img, x, y, color);
 			x++;
 		}

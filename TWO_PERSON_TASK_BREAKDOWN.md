@@ -190,7 +190,7 @@ an orthonormal basis for ray generation.
   cheaper than unnecessary heap allocation.
 - Keep object traversal and color calculation deterministic.
 
-## A5. Implement nearest-hit orchestration
+## [x] A5. Implement nearest-hit orchestration (DONE)
 
 **Goal:** make a ray return the closest visible object, independent of the
 specific object formula.

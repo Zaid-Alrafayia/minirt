@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/08 01:47:39 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/11 22:16:00 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ t_ray	camera_ray(t_camera *cam, double x, double y);
 int		pack_color(t_color color);
 void	put_pixel(t_img *img, int x, int y, int color);
 void	render_scene(t_app *app);
+int		find_closest_hit(t_ray ray, t_scene *scene, t_hit *hit);
+t_color	trace_ray(t_ray ray, t_scene *scene);
 
 #endif
