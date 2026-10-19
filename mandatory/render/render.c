@@ -3,33 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 00:19:49 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/11 22:15:00 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/18 23:20:34 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../miniRT.h"
 
-//removed test_color so window is expected to be black until intersections work
 static int	intersect_obj(t_ray ray, t_object *obj, t_hit *hit)
 {
 	int	is_hit;
 
-	(void)ray; //remove it after calling intersection functions
 	is_hit = 0;
 	if (!obj || !obj->data)
 		return (0);
 	if (obj->type == OBJ_SPHERE)
-		is_hit = 0;//replace with is_hit = intersect_sphere(...)
+		is_hit = intersect_sphere(ray, obj->data, hit);
 	else if (obj->type == OBJ_PLANE)
-		is_hit = 0; //replace with is_hit = intersect_plane(...)
+		is_hit = intersect_plane(ray, obj->data, hit);
 	else if (obj->type == OBJ_CYLINDER)
-		is_hit = 0; //replace with is_hit = intersect_cylinder(...)
+		is_hit = intersect_cylinder(ray, obj->data, hit);
 	if (is_hit)
 	{
 		hit->color = obj->color;
+		hit->point = vecadd(ray.origin, vecscale(ray.dir, hit->t));
 		hit->obj = obj;
 	}
 	return (is_hit);
@@ -65,7 +64,7 @@ t_color	trace_ray(t_ray ray, t_scene *scene)
 
 	if (find_closest_hit(ray, scene, &hit))
 	{
-		//return lighting func here instead
+		check_lights(ray, &hit, scene);
 		return (hit.color);
 	}
 	return ((t_color){0.0, 0.0, 0.0});

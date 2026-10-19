@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 14:52:10 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/03 00:12:19 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/18 21:49:46 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ typedef struct s_camera
 	t_vec3		up_vec;
 	t_vec3		forward_vec;
 }				t_camera;
-
-typedef struct s_hit
-{
-	double		t;
-	t_vec3		point;
-	t_vec3		normal;
-	t_color		color;
-	void		*obj;
-}				t_hit;
 
 typedef enum e_type
 {
@@ -96,6 +87,16 @@ typedef struct s_object
 	void		*data;
 	t_color		color;
 }				t_object;
+
+typedef struct s_hit
+{
+	double		t;
+	t_vec3		point;
+	t_vec3		normal;
+	t_color		color;
+	t_object	*obj;
+}				t_hit;
+
 typedef struct s_ambient
 {
 	double		ratio;

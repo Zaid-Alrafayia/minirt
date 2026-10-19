@@ -48,6 +48,8 @@ void	clean_gnl(int fd)
 
 int	check_lca(int fd, t_app *app, char *line)
 {
+	(void)fd;
+	(void)line;
 	if (app->scene.lights_count < 1)
 		ft_putstr_fd("Error\nat least one light is needed\n", 2);
 	else if (!app->scene.has_amb)
@@ -56,8 +58,5 @@ int	check_lca(int fd, t_app *app, char *line)
 		ft_putstr_fd("Error\none camera is needed\n", 2);
 	else
 		return (1);
-	free(line);
-	clean_gnl(fd);
-	close(fd);
 	return (0);
 }

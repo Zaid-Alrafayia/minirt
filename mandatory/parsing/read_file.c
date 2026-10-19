@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 15:11:59 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/04 00:56:15 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/20 00:41:08 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,12 @@ int	read_fscene(char *file, t_app *app)
 	if (fd < 0)
 		return (0);
 	if (!read_lines(fd, app))
+		return (0);
+	if (!check_lca(fd, app, NULL))
 	{
-		clean_gnl(fd);
 		close(fd);
 		return (0);
 	}
-	if (!check_lca(fd, app, NULL))
-		return (0);
 	close(fd);
 	return (1);
 }
