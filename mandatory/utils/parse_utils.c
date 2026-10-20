@@ -6,25 +6,28 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:30 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/08 01:17:12 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/20 21:48:21 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../miniRT.h"
 
-void	free_split(char **parts)
+static int	count_commas(char *str)
 {
 	int	i;
+	int	count;
 
-	if (!parts)
-		return ;
 	i = 0;
-	while (parts[i])
+	count = 0;
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		free(parts[i]);
+		if (str[i] == ',')
+			count++;
 		i++;
 	}
-	free(parts);
+	return (count);
 }
 
 double	ft_atof(char *str)
@@ -60,7 +63,7 @@ int	parse_vec3(char *str, t_vec3 *vec)
 {
 	char	**parts;
 
-	if (!str)
+	if (!str || count_commas(str) != 2)
 		return (1);
 	parts = ft_split(str, ',');
 	if (!parts)
@@ -83,6 +86,8 @@ t_color	parse_color(char *str)
 	t_color	color;
 	char	**parts;
 
+	if (!str || count_commas(str) != 2)
+		return ((t_color){-1.0, -1.0, -1.0});
 	color.r = -1.0;
 	color.g = -1.0;
 	color.b = -1.0;
