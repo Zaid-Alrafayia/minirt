@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/18 23:20:04 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:46:02 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int		intersect_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 int		intersect_plane(t_ray ray, t_plane *plane, t_hit *hit);
 int		intersect_cylinder(t_ray ray, t_cylinder *cy, t_hit *hit);
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene);
+int		is_valid_normal(t_vec3 v);
 
 #endif

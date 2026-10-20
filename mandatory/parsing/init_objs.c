@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/08 03:17:28 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:43:21 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	init_plane(char **parts, t_app *app)
 		return (0);
 	pl = malloc(sizeof(t_plane));
 	if (!pl || parse_vec3(parts[1], &pl->point) || parse_vec3(parts[2],
-			&pl->normal) || is_zero_vec(pl->normal))
+			&pl->normal) || !is_valid_normal(pl->normal))
 	{
 		free(pl);
 		free(obj);

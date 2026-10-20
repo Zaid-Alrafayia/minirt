@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 00:38:27 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 01:29:08 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:45:28 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	init_cylinder_data(char **parts, t_cylinder **cy)
 	if (!*cy)
 		return (0);
 	if (parse_vec3(parts[1], &(*cy)->center) || parse_vec3(parts[2],
-			&(*cy)->axis) || is_zero_vec((*cy)->axis))
+			&(*cy)->axis) || !is_valid_normal((*cy)->axis))
 	{
 		free(*cy);
 		return (0);

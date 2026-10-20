@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_elem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:12:19 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/07 11:37:04 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:44:24 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_camera(char **parts, t_app *app)
 		return (-2);
 	if (arrstr_len(parts) != 4 || parse_vec3(parts[1], &app->scene.cam.pos)
 		|| parse_vec3(parts[2], &app->scene.cam.dir)
-		|| is_zero_vec(app->scene.cam.dir))
+		|| !is_valid_normal(app->scene.cam.dir))
 		return (-3);
 	app->scene.cam.dir = normvec(app->scene.cam.dir);
 	if (!is_num(parts[3]))

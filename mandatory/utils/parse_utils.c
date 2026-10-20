@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:30 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/20 21:48:21 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:41:48 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,4 @@ t_color	parse_color(char *str)
 	color.b = ft_atof(parts[2]) / 255.0;
 	free_split(parts);
 	return (color);
-}
-
-int	is_valid_color(t_color c)
-{
-	if (c.r < 0.0 || c.r > 1.0 || c.g < 0.0 || c.g > 1.0 || c.b < 0.0
-		|| c.b > 1.0)
-		return (0);
-	return (1);
 }

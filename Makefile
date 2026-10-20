@@ -20,7 +20,7 @@ SRC         = $(SRC_DIR)main.c $(SRC_DIR)windows.c $(SRC_DIR)utils/cleanup.c $(S
 			$(SRC_DIR)parsing/init_elem.c $(SRC_DIR)parsing/init_objs.c $(SRC_DIR)parsing/init_cylinder.c $(SRC_DIR)parsing/read_file.c $(SRC_DIR)utils/parse_utils.c \
 			mathlib/dotprod.c mathlib/norm.c mathlib/normvec.c mathlib/vecadd.c mathlib/vecmag.c mathlib/vecsub.c mathlib/vecscale.c \
 			 mathlib/veccross.c mathlib/is_zero_vec.c $(SRC_DIR)utils/render_utils.c $(SRC_DIR)render/camera.c $(SRC_DIR)render/render.c mathlib/vecsquared.c $(SRC_DIR)/render/intersect.c \
-			 $(SRC_DIR)render/lighting.c mathlib/veclen.c
+			 $(SRC_DIR)render/lighting.c mathlib/veclen.c $(SRC_DIR)utils/validation.c
 			
 			
 BONUS_DIR   = src_bonus
