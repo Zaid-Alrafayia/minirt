@@ -23,10 +23,18 @@ SRC         = $(SRC_DIR)main.c $(SRC_DIR)windows.c $(SRC_DIR)utils/cleanup.c $(S
 			 $(SRC_DIR)render/lighting.c mathlib/veclen.c $(SRC_DIR)utils/validation.c
 			
 			
-BONUS_DIR   = src_bonus
-#add bonus here
-BONUS_SRC   = mathlib/dotprod.c mathlib/norm.c mathlib/normvec.c mathlib/vecadd.c \
-			mathlib/vecmag.c mathlib/vecsub.c
+BONUS_DIR   = bonus/
+BONUS_SRC   = $(BONUS_DIR)main_bonus.c $(BONUS_DIR)windows_bonus.c \
+			$(BONUS_DIR)utils/cleanup_bonus.c $(BONUS_DIR)utils/parse_utils_bonus.c \
+			$(BONUS_DIR)utils/render_utils_bonus.c $(BONUS_DIR)utils/validation_bonus.c \
+			$(BONUS_DIR)parsing/file_validation_bonus.c $(BONUS_DIR)parsing/init_elem_bonus.c \
+			$(BONUS_DIR)parsing/init_objs_bonus.c $(BONUS_DIR)parsing/init_cylinder_bonus.c \
+			$(BONUS_DIR)parsing/read_file_bonus.c $(BONUS_DIR)render/camera_bonus.c \
+			$(BONUS_DIR)render/intersect_bonus.c $(BONUS_DIR)render/lighting_bonus.c \
+			$(BONUS_DIR)render/render_bonus.c mathlib/dotprod.c mathlib/norm.c \
+			mathlib/normvec.c mathlib/vecadd.c mathlib/vecmag.c mathlib/vecsub.c \
+			mathlib/vecscale.c mathlib/veccross.c mathlib/is_zero_vec.c \
+			mathlib/vecsquared.c mathlib/veclen.c
 
 
 OBJ         = $(SRC:.c=.o)
