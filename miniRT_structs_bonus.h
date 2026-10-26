@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_structs_bonus.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:07:47 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/25 07:39:49 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/26 23:55:46 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,7 @@ typedef struct s_tex
 	int			line_len;
 	int			endian;
 }				t_tex;
-/* texture_map can be either "checked" or "file.xpm" or "mirror"*/
-// bump_map = "file.xpm"
+
 typedef struct s_object
 {
 	int			type;
