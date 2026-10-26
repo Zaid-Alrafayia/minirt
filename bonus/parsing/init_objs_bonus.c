@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/20 22:43:21 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:12:00 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../miniRT.h"
+#include "../../miniRT_bonus.h"
 
 static int	add_object(t_object *obj, t_app *app)
 {
@@ -32,7 +32,7 @@ int	init_sphere(char **parts, t_app *app)
 	t_sphere	*sp;
 	t_color		color;
 
-	if (arrstr_len(parts) != 4)
+	if (!(arrstr_len(parts) >= 4 && arrstr_len(parts) <= 6))
 		return (-3);
 	color = parse_color(parts[3]);
 	if (!is_valid_color(color) || !is_num(parts[2]) || ft_atof(parts[2]) <= 0)
@@ -48,6 +48,10 @@ int	init_sphere(char **parts, t_app *app)
 		return (0);
 	}
 	sp->diameter = ft_atof(parts[2]);
+	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
+		sp->texture_map = ft_strdup(parts[4]);
+	if (arrstr_len(parts) == 6)
+		sp->bump_map = ft_strdup(parts[5]);
 	obj->type = OBJ_SPHERE;
 	obj->color = color;
 	obj->data = sp;
@@ -60,7 +64,7 @@ int	init_plane(char **parts, t_app *app)
 	t_plane		*pl;
 	t_color		color;
 
-	if (arrstr_len(parts) != 4)
+	if (!(arrstr_len(parts) >= 4 && arrstr_len(parts) <= 6))
 		return (-3);
 	color = parse_color(parts[3]);
 	if (!is_valid_color(color))
@@ -76,6 +80,10 @@ int	init_plane(char **parts, t_app *app)
 		free(obj);
 		return (0);
 	}
+	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
+		pl->texture_map = ft_strdup(parts[4]);
+	if (arrstr_len(parts) == 6)
+		pl->bump_map = ft_strdup(parts[5]);
 	pl->normal = normvec(pl->normal);
 	obj->type = OBJ_PLANE;
 	obj->color = color;

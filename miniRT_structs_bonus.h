@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_structs_bonus.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:07:47 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:07:51 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:39:49 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_STRUCTS_BONUS_H
 # define MINIRT_STRUCTS_BONUS_H
+# include "42_libft/libft.h"
+# include <stdbool.h>
 
 typedef struct s_vec3
 {
@@ -88,18 +90,38 @@ typedef struct s_cylinder
 
 typedef struct s_cone
 {
-	t_vec3		tip;
+	t_vec3		center;
 	t_vec3		axis;
-	double		angle;
+	double		diameter;
+	double		radius;
+	double		radius_sq;
 	double		height;
+	double		k_sq;
+
 }				t_cone;
 
+typedef struct s_tex
+{
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_tex;
+/* texture_map can be either "checked" or "file.xpm" or "mirror"*/
+// bump_map = "file.xpm"
 typedef struct s_object
 {
-	t_type		type;
+	int			type;
 	void		*data;
 	t_color		color;
-	t_material	mat;
+	int			is_checker;
+	char		*tex_path;
+	char		*bump_path;
+	t_tex		tex;
+	t_tex		bump;
 }				t_object;
 
 typedef struct s_hit
@@ -140,8 +162,11 @@ typedef struct s_light
 typedef struct s_scene
 {
 	t_ambient	amb_light;
+	bool		has_amb;
 	t_camera	cam;
+	bool		has_cam;
 	t_list		*lights;
+	int			lights_count;
 	t_list		*objects;
 }				t_scene;
 

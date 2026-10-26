@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../miniRT.h"
+#include "../../miniRT_bonus.h"
 
 static int	intersect_obj(t_ray ray, t_object *obj, t_hit *hit)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../miniRT.h"
+#include "../../miniRT_bonus.h"
 
 static t_vec3	get_world_up(t_vec3 forward)
 {

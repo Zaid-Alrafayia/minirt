@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 19:29:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 00:36:15 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/25 06:18:38 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static void	apply_light(t_color *light_cont, t_hit *hit, t_light *light,
 	if (!in_shadow(hit, hit->normal, light, scene))
 	{
 		intensity = fmax(0, dotprod(l, hit->normal));
-		light_cont->r += intensity * light->brightness * light->color.r;
-		light_cont->g += intensity * light->brightness * light->color.g;
-		light_cont->b += intensity * light->brightness * light->color.b;
+		light_cont->r += intensity * light->brightness * 1;
+		light_cont->g += intensity * light->brightness * 1;
+		light_cont->b += intensity * light->brightness * 1;
 	}
 }
 
@@ -83,8 +83,8 @@ static void	clamp_light(t_color *light_cont)
 
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene)
 {
-	t_list		*curr;
-	t_color		light_cont;
+	t_list	*curr;
+	t_color	light_cont;
 
 	curr = scene->lights;
 	light_cont.r = scene->amb_light.ratio * scene->amb_light.color.r;

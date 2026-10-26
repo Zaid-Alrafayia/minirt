@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../miniRT.h"
+#include "../../miniRT_bonus.h"
 
 int	intersect_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 {

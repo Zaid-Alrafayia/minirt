@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_cylinder_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 00:38:27 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 22:45:28 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:13:01 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../miniRT.h"
+#include "../../miniRT_bonus.h"
 
 static int	init_cylinder_data(char **parts, t_cylinder **cy)
 {
@@ -26,6 +26,10 @@ static int	init_cylinder_data(char **parts, t_cylinder **cy)
 	(*cy)->diameter = ft_atof(parts[3]);
 	(*cy)->height = ft_atof(parts[4]);
 	(*cy)->axis = normvec((*cy)->axis);
+	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
+		(*cy)->texture_map = ft_strdup(parts[4]);
+	if (arrstr_len(parts) == 6)
+		(*cy)->bump_map = ft_strdup(parts[5]);
 	if ((*cy)->diameter <= 0 || (*cy)->height <= 0)
 	{
 		free(*cy);
@@ -57,7 +61,7 @@ int	init_cylinder(char **parts, t_app *app)
 	t_cylinder	*cy;
 	t_color		color;
 
-	if (arrstr_len(parts) != 6)
+	if (!(arrstr_len(parts) >= 6 && arrstr_len(parts) <= 8))
 		return (-3);
 	color = parse_color(parts[5]);
 	if (!is_valid_color(color) || !is_num(parts[3]) || !is_num(parts[4]))

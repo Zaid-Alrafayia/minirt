@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../miniRT.h"
+#include "../miniRT_bonus.h"
 
 static int	check_args(int ac, char **av)
 {
