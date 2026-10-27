@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 00:38:27 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 22:45:28 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/27 23:22:01 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static int	add_cylinder(t_cylinder *cy, t_color color, t_app *app)
 	obj->data = cy;
 	node = ft_lstnew(obj);
 	if (!node)
-		return (free_object(obj), 0);
+	{
+		free_object(obj);
+		return (0);
+	}
 	ft_lstadd_back(&app->scene.objects, node);
 	return (1);
 }

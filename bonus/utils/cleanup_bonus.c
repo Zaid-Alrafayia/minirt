@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:46:30 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 21:41:19 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/28 01:02:39 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	free_object(void *content)
 		return ;
 	if (obj->data)
 		free(obj->data);
+	if (obj->tex_path)
+		free(obj->tex_path);
+	if (obj->bump_path)
+		free(obj->bump_path);
 	free(obj);
 }
 

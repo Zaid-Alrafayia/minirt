@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cone_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 07:17:02 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/25 07:23:17 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/28 01:01:55 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ static int	init_cone_data(char **parts, t_cone **co)
 	(*co)->diameter = ft_atof(parts[3]);
 	(*co)->height = ft_atof(parts[4]);
 	(*co)->axis = normvec((*co)->axis);
-	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
-		(*co)->texture_map = ft_strdup(parts[4]);
-	if (arrstr_len(parts) == 6)
-		(*co)->bump_map = ft_strdup(parts[5]);
 	if ((*co)->diameter <= 0 || (*co)->height <= 0)
 	{
 		free(*co);
@@ -40,28 +36,35 @@ static int	init_cone_data(char **parts, t_cone **co)
 	return (1);
 }
 
-static int	add_cone(t_cone *co, t_color color, t_app *app)
+static int	add_cone(t_cone *co, t_color color, char **parts, t_app *app)
 {
 	t_object	*obj;
 	t_list		*node;
 
 	obj = malloc(sizeof(t_object));
 	if (!obj)
-		return (free(co), 0);
+	{
+		free(co);
+		return (0);
+	}
 	obj->type = OBJ_CONE;
 	obj->color = color;
 	obj->data = co;
+	set_textures(obj, parts, 6);
 	node = ft_lstnew(obj);
 	if (!node)
-		return (free_object(obj), 0);
+	{
+		free_object(obj);
+		return (0);
+	}
 	ft_lstadd_back(&app->scene.objects, node);
 	return (1);
 }
 
 int	init_cone(char **parts, t_app *app)
 {
-	t_cone *co;
-	t_color color;
+	t_cone	*co;
+	t_color	color;
 
 	if (!(arrstr_len(parts) >= 6 && arrstr_len(parts) <= 8))
 		return (-3);
@@ -70,5 +73,5 @@ int	init_cone(char **parts, t_app *app)
 		return (0);
 	if (!init_cone_data(parts, &co))
 		return (0);
-	return (add_cone(co, color, app));
+	return (add_cone(co, color, parts, app));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:34 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/25 07:12:00 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/28 00:43:23 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ static int	add_object(t_object *obj, t_app *app)
 		return (0);
 	}
 	ft_lstadd_back(&app->scene.objects, node);
+	return (1);
+}
+
+static int	init_plane_data(char **parts, t_plane **pl)
+{
+	*pl = malloc(sizeof(t_plane));
+	if (!*pl)
+		return (0);
+	if (parse_vec3(parts[1], &(*pl)->point) || parse_vec3(parts[2],
+			&(*pl)->normal) || !is_valid_normal((*pl)->normal))
+	{
+		free(*pl);
+		return (0);
+	}
+	(*pl)->normal = normvec((*pl)->normal);
 	return (1);
 }
 
@@ -48,10 +63,7 @@ int	init_sphere(char **parts, t_app *app)
 		return (0);
 	}
 	sp->diameter = ft_atof(parts[2]);
-	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
-		sp->texture_map = ft_strdup(parts[4]);
-	if (arrstr_len(parts) == 6)
-		sp->bump_map = ft_strdup(parts[5]);
+	set_textures(obj, parts, 4);
 	obj->type = OBJ_SPHERE;
 	obj->color = color;
 	obj->data = sp;
@@ -67,24 +79,15 @@ int	init_plane(char **parts, t_app *app)
 	if (!(arrstr_len(parts) >= 4 && arrstr_len(parts) <= 6))
 		return (-3);
 	color = parse_color(parts[3]);
-	if (!is_valid_color(color))
+	if (!is_valid_color(color) || !init_plane_data(parts, &pl))
 		return (0);
 	obj = malloc(sizeof(t_object));
 	if (!obj)
-		return (0);
-	pl = malloc(sizeof(t_plane));
-	if (!pl || parse_vec3(parts[1], &pl->point) || parse_vec3(parts[2],
-			&pl->normal) || !is_valid_normal(pl->normal))
 	{
 		free(pl);
-		free(obj);
 		return (0);
 	}
-	if (arrstr_len(parts) == 5 || arrstr_len(parts) == 6)
-		pl->texture_map = ft_strdup(parts[4]);
-	if (arrstr_len(parts) == 6)
-		pl->bump_map = ft_strdup(parts[5]);
-	pl->normal = normvec(pl->normal);
+	set_textures(obj, parts, 4);
 	obj->type = OBJ_PLANE;
 	obj->color = color;
 	obj->data = pl;

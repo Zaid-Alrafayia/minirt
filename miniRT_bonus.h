@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/09/28 16:18:19 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/28 00:21:55 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef MINIRT_BONUS_H
 # define MINIRT_BONUS_H
 # define WIDTH 960
@@ -21,6 +22,7 @@
 
 # include "42_libft/libft.h"
 # include "miniRT_structs_bonus.h"
+# include "mathlib/mathlib.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <float.h>
@@ -49,6 +51,7 @@ int		init_light(char **parts, t_app *app);
 int		init_sphere(char **parts, t_app *app);
 int		init_plane(char **parts, t_app *app);
 int		init_cylinder(char **parts, t_app *app);
+int		init_cone(char **parts, t_app *app);
 int		is_valid_color(t_color c);
 void	clean_gnl(int fd);
 int		check_lca(int fd, t_app *app, char *line);
@@ -64,15 +67,6 @@ int		intersect_plane(t_ray ray, t_plane *plane, t_hit *hit);
 int		intersect_cylinder(t_ray ray, t_cylinder *cy, t_hit *hit);
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene);
 int		is_valid_normal(t_vec3 v);
-
-double	vecmag(const t_vec3 vec);
-int		is_zero_vec(t_vec3 vec);
-t_vec3	vecadd(t_vec3 vec1, t_vec3 vec2);
-t_vec3	vecsub(t_vec3 vec1, t_vec3 vec2);
-t_vec3	normvec(t_vec3 vec);
-double	dotprod(t_vec3 vec1, t_vec3 vec2);
-t_vec3	vecscale(t_vec3 vec, double scalar);
-t_vec3	veccross(t_vec3 vec1, t_vec3 vec2);
-double	veclen(t_vec3 v);
+void	set_textures(t_object *obj, char **parts, int i);
 
 #endif
