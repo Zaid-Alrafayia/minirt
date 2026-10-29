@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/28 00:21:55 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/29 12:45:37 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ t_color	trace_ray(t_ray ray, t_scene *scene);
 int		intersect_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 int		intersect_plane(t_ray ray, t_plane *plane, t_hit *hit);
 int		intersect_cylinder(t_ray ray, t_cylinder *cy, t_hit *hit);
+int		intersect_cone(t_ray ray, t_cone *co, t_hit *hit);
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene);
 int		is_valid_normal(t_vec3 v);
 void	set_textures(t_object *obj, char **parts, int i);
+t_vec3	get_cylinder_normal(t_hit *hit, t_cylinder *cy);
 
 #endif

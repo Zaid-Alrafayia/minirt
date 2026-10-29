@@ -25,6 +25,8 @@ static int	intersect_obj(t_ray ray, t_object *obj, t_hit *hit)
 		is_hit = intersect_plane(ray, obj->data, hit);
 	else if (obj->type == OBJ_CYLINDER)
 		is_hit = intersect_cylinder(ray, obj->data, hit);
+	else if (obj->type == OBJ_CONE)
+		is_hit = intersect_cone(ray, obj->data, hit);
 	if (is_hit)
 	{
 		hit->color = obj->color;

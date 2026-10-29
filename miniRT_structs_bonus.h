@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_structs_bonus.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:07:47 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/26 23:55:46 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/29 14:29:02 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_hit
 	t_color		color;
 	t_material	mat;
 	t_object	*obj;
+	t_vec3		view_v;
 }				t_hit;
 
 typedef struct s_camera

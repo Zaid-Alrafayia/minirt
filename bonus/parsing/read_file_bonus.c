@@ -43,6 +43,8 @@ static int	dispatch_id(char **parts, t_app *app)
 		status = init_plane(parts, app);
 	else if (ft_strncmp(parts[0], "cy", 3) == 0)
 		status = init_cylinder(parts, app);
+	else if (ft_strncmp(parts[0], "co", 3) == 0)
+		status = init_cone(parts, app);
 	return (status);
 }
 
