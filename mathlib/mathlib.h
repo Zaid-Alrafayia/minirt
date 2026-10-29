@@ -6,7 +6,7 @@
 /*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 20:57:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/29 12:47:04 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/29 14:41:50 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MATHLIB_H
 # define EPSILON 0.0001
 
-# if !defined(MINIRT_STRUCTS_BONUS_H)
+# if !defined(MINIRT_STRUCTS_H) && !defined(MINIRT_STRUCTS_BONUS_H)
 #  include "../miniRT_structs.h"
 # endif
 # include <math.h>
