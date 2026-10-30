@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 19:29:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/29 14:29:36 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/30 23:52:37 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,20 @@ static int	in_shadow(t_hit *hit, t_vec3 n, t_light *light, t_scene *scene)
 	return (0);
 }
 
-static void	apply_light(t_color *light_cont, t_hit *hit, t_light *light,
-		t_scene *scene)
+static void	apply_light(t_color *final_c, t_hit *hit, t_light *light, t_ray ray)
 {
 	t_vec3	l;
-	double	intensity;
-	t_vec3	r;
-	double	specular;
+	double	diff;
+	double	spec;
 
 	l = normvec(vecsub(light->pos, hit->point));
-	r = vecsub(vecscale(hit->normal, 2 * (dotprod(hit->normal, l))), l);
-	specular = pow(fmax(0, dotprod(r, hit->view_v)), 420);
-	if (!in_shadow(hit, hit->normal, light, scene))
-	{
-		intensity = fmax(0, dotprod(l, hit->normal)) + specular;
-		light_cont->r += intensity * light->brightness * light->color.r;
-		light_cont->g += intensity * light->brightness * light->color.g;
-		light_cont->b += intensity * light->brightness * light->color.b;
-	}
+	diff = fmax(0.0, dotprod(l, hit->normal)) * light->brightness;
+	spec = 0.0;
+	if (diff > 0.0)
+		spec = get_specular(l, hit->normal, ray.dir, light->brightness);
+	final_c->r += (hit->color.r * diff + spec) * light->color.r;
+	final_c->g += (hit->color.g * diff + spec) * light->color.g;
+	final_c->b += (hit->color.b * diff + spec) * light->color.b;
 }
 
 static void	clamp_light(t_color *light_cont)
@@ -89,22 +85,25 @@ static void	clamp_light(t_color *light_cont)
 
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene)
 {
-	t_list	*curr;
-	t_color	light_cont;
+	t_list *curr;
+	t_color final_c;
+	t_light *light;
 
 	curr = scene->lights;
-	light_cont.r = scene->amb_light.ratio * scene->amb_light.color.r;
-	light_cont.g = scene->amb_light.ratio * scene->amb_light.color.g;
-	light_cont.b = scene->amb_light.ratio * scene->amb_light.color.b;
+	final_c.r = hit->color.r * scene->amb_light.ratio
+		* scene->amb_light.color.r;
+	final_c.g = hit->color.g * scene->amb_light.ratio
+		* scene->amb_light.color.g;
+	final_c.b = hit->color.b * scene->amb_light.ratio
+		* scene->amb_light.color.b;
 	hit->normal = get_normal(ray, hit);
-	hit->view_v = vecscale(ray.dir, -1.0);
 	while (curr)
 	{
-		apply_light(&light_cont, hit, (t_light *)curr->content, scene);
+		light = (t_light *)curr->content;
+		if (!in_shadow(hit, hit->normal, light, scene))
+			apply_light(&final_c, hit, light, ray);
 		curr = curr->next;
 	}
-	clamp_light(&light_cont);
-	hit->color.r *= light_cont.r;
-	hit->color.g *= light_cont.g;
-	hit->color.b *= light_cont.b;
+	clamp_light(&final_c);
+	hit->color = final_c;
 }

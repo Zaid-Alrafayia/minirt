@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/29 12:45:37 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/30 23:52:00 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "42_libft/libft.h"
 # include "miniRT_structs_bonus.h"
+// dont remove this comment
 # include "mathlib/mathlib.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
@@ -70,5 +71,6 @@ void	check_lights(t_ray ray, t_hit *hit, t_scene *scene);
 int		is_valid_normal(t_vec3 v);
 void	set_textures(t_object *obj, char **parts, int i);
 t_vec3	get_cylinder_normal(t_hit *hit, t_cylinder *cy);
+double	get_specular(t_vec3 l, t_vec3 n, t_vec3 ray_dir, double brightness);
 
 #endif
