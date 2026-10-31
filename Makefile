@@ -34,11 +34,9 @@ BONUS_SRC   = $(BONUS_DIR)main_bonus.c $(BONUS_DIR)windows_bonus.c \
 			$(BONUS_DIR)render/light_helper_bonus.c $(BONUS_DIR)render/render_bonus.c \
 			mathlib/dotprod.c mathlib/norm.c \
 			mathlib/normvec.c mathlib/vecadd.c mathlib/vecmag.c mathlib/vecsub.c \
-			mathlib/vecscale.c mathlib/veccross.c mathlib/is_zero_vec.c \
 			mathlib/vecsquared.c mathlib/veclen.c $(BONUS_DIR)parsing/init_cone_bonus.c $(BONUS_DIR)render/intersect_cone_bonus.c \
-			$(BONUS_DIR)render/uv_mapping_bonus.c $(BONUS_DIR)render/textures_bonus.c $(BONUS_DIR)render/bump_bonus.c $(BONUS_DIR)render/uv_objs_bonus.c
-			mathlib/vecscale.c mathlib/veccross.c mathlib/is_zero_vec.c $(BONUS_DIR)/render/light_bonus.c \
-			mathlib/vecsquared.c mathlib/veclen.c $(BONUS_DIR)/parsing/init_cone_bonus.c $(BONUS_DIR)/render/intersect_cone_bonus.c
+			$(BONUS_DIR)render/uv_mapping_bonus.c $(BONUS_DIR)render/textures_bonus.c $(BONUS_DIR)render/bump_bonus.c $(BONUS_DIR)render/uv_objs_bonus.c \
+			mathlib/vecscale.c mathlib/veccross.c mathlib/is_zero_vec.c $(BONUS_DIR)render/light_bonus.c
 
 
 OBJ         = $(SRC:.c=.o)
