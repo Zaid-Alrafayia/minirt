@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:12:19 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/20 22:44:24 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/30 19:08:47 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	init_light(char **parts, t_app *app)
 	t_color	color;
 	int		status;
 
+	if (app->scene.lights_count > 0)
+		return (-4);
 	if (arrstr_len(parts) != 4)
 		return (-3);
 	brightness = ft_atof(parts[2]);

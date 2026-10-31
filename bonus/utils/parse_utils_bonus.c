@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 16:14:30 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/28 00:21:43 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/30 18:15:44 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void	set_textures(t_object *obj, char **parts, int i)
 	obj->is_checker = 0;
 	obj->tex_path = NULL;
 	obj->bump_path = NULL;
+	obj->tex.img = NULL;
+	obj->bump.img = NULL;
 	if (arrstr_len(parts) > i)
 	{
 		if (ft_strncmp(parts[i], "checked", 8) == 0)

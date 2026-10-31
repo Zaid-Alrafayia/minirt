@@ -1,0 +1,24 @@
+A 0.08 180,190,210
+
+C -1.5,3.6,-9.5 0,-0.15,1 65
+
+L -8,7.5,1 0.7 40,120,255
+L 8,7.5,1 0.75 255,120,40
+
+pl 0,0,0 0,1,0 90,95,105
+pl 0,0,11 0,0,-1 60,65,80
+
+cy -6,1.25,3 0,1,0 1.5 2.5 240,240,240 bonus/textures/marble.xpm
+sp -6,3.25,3 1.5 255,255,255 bonus/textures/jupiter.xpm bonus/textures/bump.xpm
+
+cy -3,1.25,3 0,1,0 1.5 2.5 240,240,240 bonus/textures/marble.xpm
+sp -3,3.25,3 1.5 255,255,255 bonus/textures/moon.xpm bonus/textures/moon.xpm
+
+cy 0,1.25,3 0,1,0 1.5 2.5 240,240,240 bonus/textures/marble.xpm
+sp 0,3.25,3 1.5 255,255,255 bonus/textures/earth.xpm bonus/textures/earth_bump.xpm
+
+cy 3,1.25,3 0,1,0 1.5 2.5 240,240,240 bonus/textures/marble.xpm
+sp 3,3.25,3 1.5 255,255,255 bonus/textures/mercury.xpm bonus/textures/mercury.xpm
+
+sp -1.8,0.6,0.5 1.2 61,183,228
+sp 1.8,0.5,0.8 1.0 91,91,109

@@ -6,14 +6,14 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 16:35:33 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/20 22:46:02 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/31 21:46:10 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# define WIDTH 960
-# define HEIGHT 540
+# define WIDTH 1600
+# define HEIGHT 900
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

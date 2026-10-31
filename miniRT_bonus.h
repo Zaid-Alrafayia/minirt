@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/29 12:45:37 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/31 22:59:53 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_BONUS_H
 # define MINIRT_BONUS_H
-# define WIDTH 960
-# define HEIGHT 540
+# define WIDTH 1600
+# define HEIGHT 900
 # define EPSILON 0.0001
 
 # ifndef M_PI
@@ -70,5 +70,15 @@ void	check_lights(t_ray ray, t_hit *hit, t_scene *scene);
 int		is_valid_normal(t_vec3 v);
 void	set_textures(t_object *obj, char **parts, int i);
 t_vec3	get_cylinder_normal(t_hit *hit, t_cylinder *cy);
+void	get_object_uv(t_hit *hit, double *u, double *v);
+t_color	get_checker_color(t_hit *hit);
+int		init_textures(t_app *app);
+t_color	get_texture_color(t_hit *hit, t_tex *tex);
+void	destroy_textures(t_app *app);
+t_vec3	bump_mapping(t_hit *hit, t_tex *bump);
+void	get_sphere_uv(t_hit *hit, double *u, double *v);
+void	get_plane_uv(t_hit *hit, double *u, double *v);
+void	get_cylinder_uv(t_hit *hit, double *u, double *v);
+void	get_cone_uv(t_hit *hit, double *u, double *v);
 
 #endif

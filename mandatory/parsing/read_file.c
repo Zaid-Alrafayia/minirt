@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 15:11:59 by jalghamd          #+#    #+#             */
-/*   Updated: 2026/10/20 00:41:08 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/30 19:09:51 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ static int	parse_line(char *line, t_app *app)
 		ft_putstr_fd("Error\nonly one ambient light is allowed\n", 2);
 	else if (status == -2)
 		ft_putstr_fd("Error\nonly one camera is allowed\n", 2);
+	else if (status == -4)
+		ft_putstr_fd("Error\nonly one light source is allowed\n", 2);
 	else if (status == -3)
-		ft_putstr_fd("Error\ncomponant data incorrect\n", 2);
+		ft_putstr_fd("Error\ncomponent data incorrect\n", 2);
 	free_split(parts);
 	return (status);
 }

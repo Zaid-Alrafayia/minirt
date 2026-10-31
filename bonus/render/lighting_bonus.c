@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaalrafa <zaalrafa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 19:29:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/29 14:29:36 by zaalrafa         ###   ########.fr       */
+/*   Updated: 2026/10/30 22:23:37 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,18 @@ void	check_lights(t_ray ray, t_hit *hit, t_scene *scene)
 	t_list	*curr;
 	t_color	light_cont;
 
+	if (hit->obj->tex.img)
+		hit->color = get_texture_color(hit, &hit->obj->tex);
+	else if (hit->obj->is_checker)
+		hit->color = get_checker_color(hit);
+	hit->normal = get_normal(ray, hit);
+	if (hit->obj->bump.img)
+		hit->normal = bump_mapping(hit, &hit->obj->bump);
+	hit->view_v = vecscale(ray.dir, -1.0);
 	curr = scene->lights;
 	light_cont.r = scene->amb_light.ratio * scene->amb_light.color.r;
 	light_cont.g = scene->amb_light.ratio * scene->amb_light.color.g;
 	light_cont.b = scene->amb_light.ratio * scene->amb_light.color.b;
-	hit->normal = get_normal(ray, hit);
-	hit->view_v = vecscale(ray.dir, -1.0);
 	while (curr)
 	{
 		apply_light(&light_cont, hit, (t_light *)curr->content, scene);

@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:10:17 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/08 01:46:02 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/30 22:38:13 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	close_program(void *param)
 	app = (t_app *)param;
 	if (!app)
 		exit(0);
+	destroy_textures(app);
 	if (app->img.img_ptr)
 		mlx_destroy_image(app->mlx, app->img.img_ptr);
 	if (app->win)
@@ -48,9 +49,11 @@ void	init_window(t_app *app)
 	{
 		free_scene(&app->scene);
 		free(app);
-		perror("Error: Failed to initialize MiniLibX.");
+		ft_putstr_fd("Error\nfailed to initialize MiniLibX\n", 2);
 		exit(1);
 	}
+	if (!init_textures(app))
+		close_program(app);
 	app->win = mlx_new_window(app->mlx, WIDTH, HEIGHT, "miniRT");
 	if (!app->win)
 		close_program(app);

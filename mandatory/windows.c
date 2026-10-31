@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:10:17 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/08 01:46:02 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/10/30 22:37:59 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_window(t_app *app)
 	{
 		free_scene(&app->scene);
 		free(app);
-		perror("Error: Failed to initialize MiniLibX.");
+		ft_putstr_fd("Error\nfailed to initialize MiniLibX\n", 2);
 		exit(1);
 	}
 	app->win = mlx_new_window(app->mlx, WIDTH, HEIGHT, "miniRT");
