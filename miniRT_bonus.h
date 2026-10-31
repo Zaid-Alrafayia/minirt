@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:08:58 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/31 22:59:53 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/11/01 00:19:47 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "42_libft/libft.h"
 # include "miniRT_structs_bonus.h"
+// dont remove this comment
 # include "mathlib/mathlib.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
@@ -80,5 +81,6 @@ void	get_sphere_uv(t_hit *hit, double *u, double *v);
 void	get_plane_uv(t_hit *hit, double *u, double *v);
 void	get_cylinder_uv(t_hit *hit, double *u, double *v);
 void	get_cone_uv(t_hit *hit, double *u, double *v);
+double	get_specular(t_vec3 l, t_vec3 n, t_vec3 ray_dir, double brightness);
 
 #endif

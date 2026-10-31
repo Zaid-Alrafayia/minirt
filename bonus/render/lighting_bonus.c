@@ -6,7 +6,7 @@
 /*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 19:29:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/10/30 22:23:37 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/11/01 00:23:47 by jalghamd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,37 @@ static void	apply_light(t_color *light_cont, t_hit *hit, t_light *light,
 		t_scene *scene)
 {
 	t_vec3	l;
-	double	intensity;
+	double	dot_nl;
 	t_vec3	r;
 	double	specular;
 
 	l = normvec(vecsub(light->pos, hit->point));
-	r = vecsub(vecscale(hit->normal, 2 * (dotprod(hit->normal, l))), l);
-	specular = pow(fmax(0, dotprod(r, hit->view_v)), 420);
+	dot_nl = dotprod(hit->normal, l);
+	specular = 0.0;
+	if (dot_nl > 0)
+	{
+		r = vecsub(vecscale(hit->normal, 2 * dot_nl), l);
+		specular = pow(fmax(0, dotprod(r, hit->view_v)), 32);
+	}
 	if (!in_shadow(hit, hit->normal, light, scene))
 	{
-		intensity = fmax(0, dotprod(l, hit->normal)) + specular;
-		light_cont->r += intensity * light->brightness * light->color.r;
-		light_cont->g += intensity * light->brightness * light->color.g;
-		light_cont->b += intensity * light->brightness * light->color.b;
+		light_cont->r += (fmax(0, dot_nl) + specular) * light->brightness
+			* light->color.r;
+		light_cont->g += (fmax(0, dot_nl) + specular) * light->brightness
+			* light->color.g;
+		light_cont->b += (fmax(0, dot_nl) + specular) * light->brightness
+			* light->color.b;
 	}
 }
 
 static void	clamp_light(t_color *light_cont)
 {
-	if (light_cont->r > 1)
-		light_cont->r = 1;
-	if (light_cont->g > 1)
-		light_cont->g = 1;
-	if (light_cont->b > 1)
-		light_cont->b = 1;
+	if (light_cont->r > 1.0)
+		light_cont->r = 1.0;
+	if (light_cont->g > 1.0)
+		light_cont->g = 1.0;
+	if (light_cont->b > 1.0)
+		light_cont->b = 1.0;
 }
 
 void	check_lights(t_ray ray, t_hit *hit, t_scene *scene)
