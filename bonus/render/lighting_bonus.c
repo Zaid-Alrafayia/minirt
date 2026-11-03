@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalghamd <jalghamd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zaalrafa <zaalrafa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 19:29:03 by zaalrafa          #+#    #+#             */
-/*   Updated: 2026/11/01 00:39:49 by jalghamd         ###   ########.fr       */
+/*   Updated: 2026/11/04 01:38:14 by zaalrafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ static void	apply_light(t_color *light_cont, t_hit *hit, t_light *light,
 	}
 	if (!in_shadow(hit, hit->normal, light, scene))
 	{
-		light_cont->r += (fmax(0, dot_nl) + specular) * light->brightness
-			* light->color.r;
-		light_cont->g += (fmax(0, dot_nl) + specular) * light->brightness
-			* light->color.g;
-		light_cont->b += (fmax(0, dot_nl) + specular) * light->brightness
-			* light->color.b;
+		light_cont->r += (hit->color.r * fmax(0, dot_nl) + specular)
+			* light->brightness * light->color.r;
+		light_cont->g += (hit->color.g * fmax(0, dot_nl) + specular)
+			* light->brightness * light->color.g;
+		light_cont->b += (hit->color.b * fmax(0, dot_nl) + specular)
+			* light->brightness * light->color.b;
 	}
 }
 
@@ -106,18 +106,19 @@ void	check_lights(t_ray ray, t_hit *hit, t_scene *scene)
 	hit->normal = get_normal(ray, hit);
 	if (hit->obj->bump.img)
 		hit->normal = bump_mapping(hit, &hit->obj->bump);
-	hit->view_v = vecscale(ray.dir, -1.0);
+	hit->view_v = normvec(vecscale(ray.dir, -1.0));
 	curr = scene->lights;
-	light_cont.r = scene->amb_light.ratio * scene->amb_light.color.r;
-	light_cont.g = scene->amb_light.ratio * scene->amb_light.color.g;
-	light_cont.b = scene->amb_light.ratio * scene->amb_light.color.b;
+	light_cont.r = hit->color.r * scene->amb_light.ratio
+		* scene->amb_light.color.r;
+	light_cont.g = hit->color.g * scene->amb_light.ratio
+		* scene->amb_light.color.g;
+	light_cont.b = hit->color.b * scene->amb_light.ratio
+		* scene->amb_light.color.b;
 	while (curr)
 	{
 		apply_light(&light_cont, hit, (t_light *)curr->content, scene);
 		curr = curr->next;
 	}
 	clamp_light(&light_cont);
-	hit->color.r *= light_cont.r;
-	hit->color.g *= light_cont.g;
-	hit->color.b *= light_cont.b;
+	hit->color = light_cont;
 }
