@@ -92,16 +92,16 @@ C 0,3,-12 0,-0.05,1 70
 # Light: L [x,y,z] [brightness in 0.0,1.0] [R,G,B]
 L -8,12,-4 0.8 255,255,255
 
-# Plane: pl [x,y,z] [normal_x,y,z] [R,G,B] [texture/checked optional]
+# Plane: pl [x,y,z] [normal_x,y,z] [R,G,B] [texture/checked optional] [bump map optional]
 pl 0,0,0 0,1,0 70,140,60
 
-# Sphere: sp [x,y,z] [diameter] [R,G,B] [texture/checked optional]
+# Sphere: sp [x,y,z] [diameter] [R,G,B] [texture/checked optional] [bump map optional]
 sp 0,0.5,2.78 0.6 80,40,20
 
-# Cylinder: cy [x,y,z] [axis_x,y,z] [diameter] [height] [R,G,B] [texture/checked optional]
+# Cylinder: cy [x,y,z] [axis_x,y,z] [diameter] [height] [R,G,B] [texture/checked optional] [bump map optional]
 cy 0,1,4 0,1,0 2.4 2.0 240,230,210 textures/marble.xpm
 
-# Cone (Bonus): co [x,y,z] [axis_x,y,z] [diameter] [height] [R,G,B] [texture/checked optional]
+# Cone (Bonus): co [x,y,z] [axis_x,y,z] [diameter] [height] [R,G,B] [texture/checked optional] [bump map optional]
 co 0,2.8,4 0,-1,0 3.0 1.6 180,50,40 textures/red.xpm
 ```
 
